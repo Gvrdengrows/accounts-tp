@@ -4,7 +4,6 @@ import AdminPage from "./pages/AdminPage.vue";
 
 <template>
   <AdminPage />
-  asda И На русском
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

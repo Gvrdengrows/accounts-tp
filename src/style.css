@@ -1,11 +1,10 @@
 @font-face {
     font-family: "Inter";
-    src: url("../public/fonts/Inter_18pt-Regular.ttf") format("truetype");
+    src: url("assets/fonts/Inter_18pt-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 body {
     font-family: "Inter";
-    font-size: 42px;
 }
