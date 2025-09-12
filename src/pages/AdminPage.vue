@@ -4,14 +4,12 @@ import type { AccountForm } from "@models/accountForm";
 import { createForm } from "@utils/createForm";
 import { onlyString } from "@utils/validators";
 
-const metadata: AccountForm = {
+const form = createForm<AccountForm>({
   tags: { value: "string", validators: [] },
   type: { value: "ldap", validators: [] },
   login: { value: "string", validators: [onlyString] },
   password: { value: "string", validators: [onlyString] },
-};
-
-const form = createForm<AccountForm>(metadata);
+});
 </script>
 <template>
   <div class="admin-page">
@@ -20,6 +18,7 @@ const form = createForm<AccountForm>(metadata);
       <div class=""></div>
       <input v-model="form.login.value" />
       <input v-model="form.password.value" />
+      <div v-show="form.login.error">Неверено у формы логина</div>
     </div>
   </div>
 </template>
