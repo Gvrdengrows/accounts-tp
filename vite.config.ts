@@ -10,8 +10,9 @@ export default defineConfig({
       "@components": fileURLToPath(
         new URL("./src/components", import.meta.url)
       ),
-      "@models": fileURLToPath(new URL("./src/models", import.meta.url)),
+      "@models": fileURLToPath(new URL("./src/shared/models", import.meta.url)),
       "@stores": fileURLToPath(new URL("./src/stores", import.meta.url)),
+      "@utils": fileURLToPath(new URL("./src/shared/utils", import.meta.url)),
     },
   },
 });

@@ -15,7 +15,9 @@
     /* Aliases */
     "paths": {
       "@components/*": ["src/components/*"],
-      "@stores/*": ["src/stores/*"]
+      "@stores/*": ["src/stores/*"],
+      "@utils/*": ["src/shared/utils/*"],
+      "@models/*": ["src/shared/models/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
