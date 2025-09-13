@@ -93,6 +93,6 @@ const handleDelete = (index: number) => {
 }
 
 .no-password {
-  grid-template-columns: 23% 14% calc(56% - 12px) auto;
+  grid-template-columns: 23% 14% 57% auto;
 }
 </style>
