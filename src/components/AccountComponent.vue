@@ -22,7 +22,10 @@ const { form, watchForm } = createForm<AccountForm>({
   tags: { value: formattedTags.value, validators: [maxSymbols(50)] },
   type: { value: account.type, validators: [] },
   login: { value: account.login, validators: [required(), maxSymbols(100)] },
-  password: { value: account.password, validators: [maxSymbols(100)] },
+  password: {
+    value: account.password,
+    validators: [required(), maxSymbols(100)],
+  },
 });
 
 watchForm((formData) => {
@@ -58,25 +61,38 @@ const handleDelete = (index: number) => {
 };
 </script>
 <template>
-  <n-input
-    v-model:value="form.tags.value"
-    :status="form.tags.error ? 'error' : 'success'"
-  />
-  <n-select v-model:value="form.type.value" :options="typeOptions" />
-  <n-input
-    v-model:value="form.login.value"
-    :status="form.login.error ? 'error' : 'success'"
-  />
-  <n-input
-    v-model:value="form.password.value"
-    :disabled="form.password.disabled"
-    :status="form.password.error ? 'error' : 'success'"
-    type="password"
-  />
-  <n-button circle @click="handleDelete(index)">
-    <n-icon>
-      <img src="/assets/icons/delete-icon.svg" alt="delete" />
-    </n-icon>
-  </n-button>
+  <div class="form-field" :class="form.password.disabled ? 'no-password' : ''">
+    <n-input
+      v-model:value="form.tags.value"
+      :status="form.tags.error ? 'error' : 'success'"
+    />
+    <n-select v-model:value="form.type.value" :options="typeOptions" />
+    <n-input
+      v-model:value="form.login.value"
+      :status="form.login.error ? 'error' : 'success'"
+    />
+    <n-input
+      v-if="!form.password.disabled"
+      v-model:value="form.password.value"
+      :disabled="form.password.disabled"
+      :status="form.password.error ? 'error' : 'success'"
+      type="password"
+    />
+    <n-button circle @click="handleDelete(index)">
+      <n-icon>
+        <img src="/assets/icons/delete-icon.svg" alt="delete" />
+      </n-icon>
+    </n-button>
+  </div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.form-field {
+  display: grid;
+  grid-template-columns: 23% 14% 28% 28% auto;
+  gap: 6px;
+}
+
+.no-password {
+  grid-template-columns: 23% 14% calc(56% - 12px) auto;
+}
+</style>

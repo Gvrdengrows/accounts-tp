@@ -15,7 +15,7 @@ export function createForm<T extends Record<string, FieldMetaData<any>>>(
         (newValue) => {
           let hasError = false;
           for (let validator of validators) {
-            if (!validator(newValue)) {
+            if (!reactiveForm[fieldKey].disabled && !validator(newValue)) {
               hasError = true;
               break;
             }
