@@ -1,29 +1,44 @@
 <script setup lang="ts">
+import AccountComponent from "@components/AccountComponent.vue";
 import AdminHeader from "@components/AdminHeader.vue";
-import type { AccountForm } from "@models/accountForm";
-import { createForm } from "@utils/createForm";
-import { onlyString } from "@utils/validators";
+import { useAccountStore } from "@stores/account.store";
+import { storeToRefs } from "pinia";
 
-const form = createForm<AccountForm>({
-  tags: { value: "string", validators: [] },
-  type: { value: "ldap", validators: [] },
-  login: { value: "string", validators: [onlyString] },
-  password: { value: "string", validators: [onlyString] },
-});
+const { accountsList } = storeToRefs(useAccountStore());
 </script>
 <template>
   <div class="admin-page">
     <AdminHeader />
     <div class="form">
-      <div class=""></div>
-      <input v-model="form.login.value" />
-      <input v-model="form.password.value" />
-      <div v-show="form.login.error">Неверено у формы логина</div>
+      <div class="form__item">
+        <div>Метки</div>
+        <div>Тип записи</div>
+        <div>Логин</div>
+        <div>Пароль</div>
+      </div>
+      <template v-for="(_, index) of accountsList">
+        <div class="form__item">
+          <AccountComponent :index="index" />
+        </div>
+      </template>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .admin-page {
-  padding: 60px 200px;
+  width: 85%;
+  margin: auto;
+}
+
+.form {
+  margin-top: 32px;
+  display: grid;
+  gap: 16px;
+
+  &__item {
+    display: grid;
+    grid-template-columns: 23% 14% 28% 28% 7%;
+    gap: 6px;
+  }
 }
 </style>

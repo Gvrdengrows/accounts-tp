@@ -13,18 +13,26 @@ export function createForm<T extends Record<string, FieldMetaData<any>>>(
       watch(
         () => reactiveForm[fieldKey].value,
         (newValue) => {
+          let hasError = false;
           for (let validator of validators) {
             if (!validator(newValue)) {
-              reactiveForm[fieldKey].error = true;
-            } else {
-              reactiveForm[fieldKey].error = false;
+              hasError = true;
+              break;
             }
           }
-        },
-        { immediate: true }
+          reactiveForm[fieldKey].error = hasError;
+        }
       );
     }
   }
 
-  return reactiveForm;
+  return {
+    form: reactiveForm,
+    watchForm: (callback: (value: T) => void) => {
+      return watch(() => reactiveForm, callback, {
+        deep: true,
+        immediate: true,
+      });
+    },
+  };
 }

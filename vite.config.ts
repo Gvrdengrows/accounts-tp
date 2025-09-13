@@ -13,6 +13,9 @@ export default defineConfig({
       "@models": fileURLToPath(new URL("./src/shared/models", import.meta.url)),
       "@stores": fileURLToPath(new URL("./src/stores", import.meta.url)),
       "@utils": fileURLToPath(new URL("./src/shared/utils", import.meta.url)),
+      "@constants": fileURLToPath(
+        new URL("./src/shared/constants", import.meta.url)
+      ),
     },
   },
 });
